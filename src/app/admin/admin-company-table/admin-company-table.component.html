@@ -1,0 +1,16 @@
+<table class="table">
+  <thead>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Password</th>
+    <th>Email</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let company of companies">
+      <td><p>{{company.id}}</p></td>
+      <td><p>{{company.compName}}</p></td>
+      <td><p>{{company.password}}</p></td>
+      <td><p>{{company.email}}</p></td>
+    </tr>
+  </tbody>
+</table>
