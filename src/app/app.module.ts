@@ -19,6 +19,8 @@ import { AdminCompanyCreateComponent } from './admin/admin-company-create/admin-
 import { CredentialsInterceptor } from './interceptors/credentialsInterceptor';
 import { AdminCustomerTableComponent } from './admin/admin-customer-table/admin-customer-table.component';
 import { AdminCustomerCreateComponent } from './admin/admin-customer-create/admin-customer-create.component';
+import { AdminCustomerViewComponent } from './admin/admin-customer-view/admin-customer-view.component';
+import { AdminCompanyViewComponent } from './admin/admin-company-view/admin-company-view.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { AdminCustomerCreateComponent } from './admin/admin-customer-create/admi
     AdminCompanyTableComponent,
     AdminCompanyCreateComponent,
     AdminCustomerTableComponent,
-    AdminCustomerCreateComponent
+    AdminCustomerCreateComponent,
+    AdminCustomerViewComponent,
+    AdminCompanyViewComponent
   ],
   imports: [
     BrowserModule,

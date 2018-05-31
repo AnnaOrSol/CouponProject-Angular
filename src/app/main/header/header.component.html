@@ -17,6 +17,26 @@
           <span class="sr-only">(current)</span>
         </a>
       </li>
+      <li *ngIf="loggedInType == admin" class="nav-item">
+        <a class="nav-link" style="cursor: pointer;" routerLink="/admin">Admin Workbench
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li *ngIf="loggedInType == company" class="nav-item">
+        <a class="nav-link" style="cursor: pointer;" routerLink="/company">Company Workbench
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li *ngIf="loggedInType == customer" class="nav-item">
+        <a class="nav-link" style="cursor: pointer;" routerLink="/customer">Customer Workbench
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li *ngIf="loggedInType == guest" class="nav-item">
+          <a class="nav-link disabled" style="color: aliceblue" > Welcome Guest
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
     </ul>
   </div>
 </nav>
@@ -75,18 +95,18 @@
         </div>
       </div>
     </div>
-    </div>
-    <div class="modal-footer">
-      <div class="container">
-        <div class="row text-center">
-          <div class="col col-md-6"></div>
-          <div class="col col-md-3">
-            <button class="btn btn-success" (click)="login()"> Login </button>
-          </div>
-          <div class="col col-md-3">
-            <button class="btn btn-danger" (click)="modalRef.hide()"> Cancel </button>
-          </div>
+  </div>
+  <div class="modal-footer">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col col-md-6"></div>
+        <div class="col col-md-3">
+          <button class="btn btn-outline-success" (click)="login()"> Login </button>
+        </div>
+        <div class="col col-md-3">
+          <button class="btn btn-outline-danger" (click)="modalRef.hide()"> Cancel </button>
         </div>
       </div>
     </div>
+  </div>
 </ng-template>
