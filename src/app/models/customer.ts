@@ -1,6 +1,6 @@
 export class Customer {
 
-    constructor() {
+    constructor(public id: number, public custName: string, public password: string) {
 
     }
 }
