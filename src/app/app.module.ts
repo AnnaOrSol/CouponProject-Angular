@@ -3,25 +3,25 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './main/login/login.component';
 import { HeaderComponent } from './main/header/header.component';
 import { FooterComponent } from './main/footer/footer.component';
 import { HomeComponent } from './main/home/home.component';
 import { LoginService } from './services/main/login.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProjectRoutes } from './models/routes';
 import { AdminMainComponent } from './admin/admin-main/admin-main.component';
 import { AdminService } from './services/admin/admin.service';
 import { AdminCompanyTableComponent } from './admin/admin-company-table/admin-company-table.component';
 import { AdminCompanyCreateComponent } from './admin/admin-company-create/admin-company-create.component';
+import { CredentialsInterceptor } from './interceptors/credentialsInterceptor';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     HeaderComponent,
     FooterComponent,
     HomeComponent,
@@ -34,9 +34,16 @@ import { AdminCompanyCreateComponent } from './admin/admin-company-create/admin-
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(ProjectRoutes.routes, { useHash: true }),
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    ModalModule.forRoot()
   ],
-  providers: [LoginService, AdminService],
+  providers: [LoginService, AdminService,  
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CredentialsInterceptor,
+      multi: true
+    }  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserType } from '../../models/userType';
+import { LoginInfo } from '../../models/loginInfo';
+import { LoginService } from '../../services/main/login.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  user: LoginInfo;
+  admin: string = UserType.ADMIN;
+  company: string = UserType.COMPANY;
+  customer: string = UserType.CUSTOMER;
+
+  constructor(private loginService: LoginService) {
+    this.user = new LoginInfo("", "", UserType.ADMIN);
+  }
+
+  public changeUserType(userType) {
+    this.user.userType = userType;
+  }
 
   ngOnInit() {
   }
 
+  public login() {
+    this.loginService.login(this.user).subscribe(res => {
+      console.log(res);
+    });
+  }
 }

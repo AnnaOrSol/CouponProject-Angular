@@ -13,42 +13,42 @@ export class AdminService {
   constructor(private http: HttpClient) { }
 
   public createCompany(company): Observable<any> {
-    return this.http.post(this._URL + this._COMPANY_URL, company, { withCredentials: true });
+    return this.http.post(this._URL + this._COMPANY_URL, company);
   }
 
   public updateCompany(company): Observable<any> {
-    return this.http.put(this._URL  + this._COMPANY_URL, company, { withCredentials: true });
+    return this.http.put(this._URL + this._COMPANY_URL, company);
   }
 
   public getCompany(id: number): Observable<any> {
-    return this.http.get(this._URL  + this._COMPANY_URL + id, { withCredentials: true });
+    return this.http.get(this._URL + this._COMPANY_URL + id);
   }
 
   public getAllCompanies(): Observable<any> {
-    return this.http.get(this._URL  + this._COMPANY_URL, { withCredentials: true });
+    return this.http.get(this._URL + this._COMPANY_URL);
   }
 
   public deleteCompany(id: number): Observable<any> {
-    return this.http.delete(this._URL  + this._COMPANY_URL + id, { withCredentials: true });
+    return this.http.delete(this._URL + this._COMPANY_URL + id);
   }
 
   public createCustomer(customer): Observable<any> {
-    return this.http.post(this._URL + this._CUSTOMER_URL, customer, { withCredentials: true });
+    return this.http.post(this._URL + this._CUSTOMER_URL, customer);
   }
 
   public updateCustomer(customer): Observable<any> {
-    return this.http.put(this._URL + this._CUSTOMER_URL, customer, { withCredentials: true });
+    return this.http.put(this._URL + this._CUSTOMER_URL, customer);
   }
 
   public getCustomer(id: number): Observable<any> {
-    return this.http.get(this._URL + this._CUSTOMER_URL + id, { withCredentials: true });
+    return this.http.get(this._URL + this._CUSTOMER_URL + id);
   }
 
   public getAllCustomers(): Observable<any> {
-    return this.http.get(this._URL + this._CUSTOMER_URL, { withCredentials: true });
+    return this.http.get(this._URL + this._CUSTOMER_URL);
   }
 
   public deleteCustomer(id: number): Observable<any> {
-    return this.http.delete(this._URL + this._CUSTOMER_URL + id, { withCredentials: true });
+    return this.http.delete(this._URL + this._CUSTOMER_URL + id);
   }
 }
