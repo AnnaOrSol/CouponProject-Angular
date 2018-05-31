@@ -1,6 +1,9 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, TemplateRef, Input } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Company } from '../../models/company';
+import { AdminService } from '../../services/admin/admin.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { ApplicationResponse } from '../../models/applicationReponse';
 
 @Component({
   selector: 'app-admin-company-create',
@@ -10,36 +13,41 @@ import { Company } from '../../models/company';
 export class AdminCompanyCreateComponent implements OnInit {
 
   @Output() companyCreateEvent = new EventEmitter();
+  @Input() modalRef: BsModalRef;
   company: Company;
-  closeResult: string;
-  
-  constructor(private modalService: NgbModal) { 
+  response: ApplicationResponse;
+
+  constructor(private modalService: BsModalService, private adminService: AdminService) {
     this.company = new Company(null, "", "", "");
   }
 
   ngOnInit() {
   }
 
-  companyCreate(){
-    this.companyCreateEvent.emit(this.company);
-  }
-
-  open(createCompany) {
-    this.modalService.open(createCompany).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  public companyCreate() {
+    this.adminService.createCompany(this.company).subscribe(res => {
+      this.response = res;
+      if (res.responseCode == 0) {
+        this.response.alertType = "danger";
+      } else if (res.responseCode == 1) {
+        this.response.alertType = "success";
+        this.companyCreateEvent.emit(this.company);
+        setTimeout(() => {
+          this.clear();
+          this.modalRef.hide();
+        }, 1000);
+      } else {
+        this.response.alertType = "warning";
+      }
     });
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
+  public closeAlert() {
+    this.response = null;
   }
 
+  public clear() {
+    this.company = new Company(null, "", "", "");
+    this.response = null;
+  }
 }

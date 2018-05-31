@@ -4,6 +4,7 @@ import { LoginInfo } from '../../models/loginInfo';
 import { LoginService } from '../../services/main/login.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ApplicationResponse } from '../../models/applicationReponse';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,17 +21,13 @@ export class HeaderComponent implements OnInit {
   customer: string = UserType.CUSTOMER;
   response: ApplicationResponse;
 
-  constructor(private loginService: LoginService, private modalService: BsModalService) {
+  constructor(private loginService: LoginService, private modalService: BsModalService, private router: Router) {
     this.user = new LoginInfo("", "", UserType.ADMIN);
     this.response = null;
   }
 
-
   ngOnInit() {
   }
-
-
-
 
   public login() {
     this.loginService.login(this.user).subscribe(res => {
@@ -39,9 +36,22 @@ export class HeaderComponent implements OnInit {
         this.response.alertType = "danger";
       } else if (res.responseCode == 1) {
         this.response.alertType = "success";
+        setTimeout(() => {
+          let route: string = "admin";
+          if(this.user.userType === UserType.COMPANY) {
+            route = "company";
+          } else if(this.user.userType === UserType.CUSTOMER) {
+            route = "customer";
+          }
+          this.modalRef.hide();
+          this.response = null;
+          this.user =  new LoginInfo("", "", UserType.ADMIN);
+          this.router.navigate([route]);
+        }, 500);
       } else {
         this.response.alertType = "warning";
       }
+
     },
       err => {
         this.response = err.error;
@@ -50,7 +60,8 @@ export class HeaderComponent implements OnInit {
   }
 
   public logout() {
-    this.loginService.logout().subscribe();
+    this.loginService.logout().subscribe(res => {
+    });
   }
   public closeAlert() {
     this.response = null;

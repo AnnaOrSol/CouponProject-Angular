@@ -9,17 +9,12 @@ import { Company } from '../../models/company';
 })
 export class AdminMainComponent implements OnInit {
 
-  companies:Company[];
+  companies: boolean;
+  customers: boolean;
 
-  constructor(private adminService: AdminService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.adminService.getAllCompanies().subscribe(res => {this.companies = res;});
-  }
-
-  companyCreate(company) {
-    this.adminService.createCompany(company).subscribe(res => {
-      console.log(res);
-    });
+    
   }
 }

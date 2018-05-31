@@ -13,3 +13,20 @@
     animation-duration: .9s;
     display: block;
 }
+
+.navbar {
+    background: #f0b880;
+}
+
+.modal-header {
+    background: #f0b880 ;
+}
+
+.modal-footer {
+    background: #f0b880 ;
+}
+
+.modal-body {
+    background: #f9e2cc;
+}
+

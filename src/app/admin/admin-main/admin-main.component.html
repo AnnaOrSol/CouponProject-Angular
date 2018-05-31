@@ -1,17 +1,24 @@
-<div class="container">
-  <div class="row">
-    <div class="col col-md-2"></div>
-    <div class="col col-md-8">
-      <app-admin-company-table [companies]="companies">
-      </app-admin-company-table>
+<div class="overlay">
+  <div class="container text-center workgroup">
+    <div class="row">
+      <div class="col col-md-2"></div>
+      <div class="col col-md-4">
+        <button class="btn btn-outline-dark" (click)="companies = true; customers = false;">
+          Companies View
+        </button>
+      </div>
+      <div class="col col-md-4">
+        <button class="btn btn-outline-dark" (click)="companies = false; customers = true;">
+          Customers View
+        </button>
+      </div>
+      <div class="col col-md-2"></div>
     </div>
-    <div class="col col-md-2"></div>
-  </div>
-  <div class="row">
-    <div class="col col-md-8"></div>
-    <div class="col col-md-2">
-      <app-admin-company-create (companyCreateEvent)="companyCreate($event)"></app-admin-company-create>
+    <div class="row">
+      <div class="col col-md-12">
+        <app-admin-company-table *ngIf="companies"> </app-admin-company-table>
+        <app-admin-customer-table *ngIf="customers"> </app-admin-customer-table>
+      </div>
     </div>
-    <div class="col col-md-2"></div>
   </div>
 </div>
