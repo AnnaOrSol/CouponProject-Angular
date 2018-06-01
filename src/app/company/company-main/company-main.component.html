@@ -1,0 +1,21 @@
+<div class="overlay">
+    <div class="container text-center workgroup">
+        <div class="row">
+            <div class="col col-md-6">
+                <button class="btn btn-outline-dark" (click)="coupons = false; openModal(viewSpecificCoupon)">
+                    View Specific Coupon
+                </button>
+            </div>
+            <div class="col col-md-6">
+                <button class="btn btn-outline-dark" (click)="coupons = true;">
+                    Coupons View
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-md-12">
+                <app-company-coupon-table *ngIf="coupons"> </app-company-coupon-table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -40,7 +40,8 @@ export class HeaderComponent implements OnInit {
           this.loggedInType = UserType.CUSTOMER;
         else if(res === UserType.GUEST.toUpperCase())
           this.loggedInType = UserType.GUEST;
-
+        else
+          this.loggedInType = null;
         console.log(this.loggedInType);
       }
     );
@@ -90,6 +91,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public changeUserType(userType) {
+    console.log(userType);
     this.user.userType = userType;
   }
 

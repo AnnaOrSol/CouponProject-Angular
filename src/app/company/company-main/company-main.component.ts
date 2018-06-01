@@ -1,27 +1,22 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { AdminService } from '../../services/admin/admin.service';
-import { Company } from '../../models/company';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/main/login.service';
 import { UserType } from '../../models/userType';
 
 @Component({
-  selector: 'app-admin-main',
-  templateUrl: './admin-main.component.html',
-  styleUrls: ['./admin-main.component.css']
+  selector: 'app-company-main',
+  templateUrl: './company-main.component.html',
+  styleUrls: ['./company-main.component.css']
 })
-export class AdminMainComponent implements OnInit {
-
-  companies: boolean;
-  customers: boolean;
+export class CompanyMainComponent implements OnInit {
+  coupons: boolean;
   modalRef: BsModalRef;
-
   constructor(private modalService: BsModalService, private router: Router, private sessionService: LoginService) { }
 
   ngOnInit() {
     this.sessionService.getSessionInfo().subscribe(res => {
-      if(!(res === UserType.ADMIN.toUpperCase()))
+      if(!(res === UserType.COMPANY.toUpperCase()))
         this.router.navigate(["/home"]);
     });
   }

@@ -3,10 +3,17 @@
     100% {opacity:1;}
 }
 
+
 .company-container .row{
     margin-top: 4%;
     margin-bottom: 4%;
 }
+
+.container {
+    animation-name: slidein;
+    animation-duration: .9s;
+}
+
 
 .alert {
     animation-name: slidein;
@@ -23,5 +30,6 @@
 }
 
 .modal-body {
+
     background: #f9e2cc;
 }

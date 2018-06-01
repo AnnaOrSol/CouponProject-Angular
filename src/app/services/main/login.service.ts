@@ -13,6 +13,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   public login(user: LoginInfo): Observable<any> {
+    console.log(user);
     let service: string = "AdminService";
     if (user.userType === UserType.COMPANY)
       service = "CompanyService";

@@ -7,12 +7,12 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      <li *ngIf="loggedInType == guest" class="nav-item">
         <a class="nav-link" style="cursor: pointer;" (click)="openModal(loginTemplate)">Login
           <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="loggedInType != guest" class="nav-item">
         <a class="nav-link" href="#" (click)="logout()">Logout
           <span class="sr-only">(current)</span>
         </a>
@@ -33,10 +33,10 @@
         </a>
       </li>
       <li *ngIf="loggedInType == guest" class="nav-item">
-          <a class="nav-link disabled" style="color: aliceblue" > Welcome Guest
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
+        <a class="nav-link disabled" style="color: aliceblue"> Welcome Guest
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
     </ul>
   </div>
 </nav>
@@ -76,7 +76,7 @@
           <label>UserType:</label>
         </div>
         <div class="col col-md-3">
-          <select (change)="changeUserType($event.target)">
+          <select (change)="changeUserType(user.userType)"  [(ngModel)]="user.userType">
             <option value="{{admin}}">{{admin}}</option>
             <option value="{{company}}">{{company}}</option>
             <option value="{{customer}}">{{customer}}</option>

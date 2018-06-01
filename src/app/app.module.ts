@@ -21,6 +21,10 @@ import { AdminCustomerTableComponent } from './admin/admin-customer-table/admin-
 import { AdminCustomerCreateComponent } from './admin/admin-customer-create/admin-customer-create.component';
 import { AdminCustomerViewComponent } from './admin/admin-customer-view/admin-customer-view.component';
 import { AdminCompanyViewComponent } from './admin/admin-company-view/admin-company-view.component';
+import { CompanyMainComponent } from './company/company-main/company-main.component';
+import { CompanyCouponTableComponent } from './company/company-coupon-table/company-coupon-table.component';
+import { CompanyCouponViewComponent } from './company/company-coupon-view/company-coupon-view.component';
+import { CompanyCouponCreateComponent } from './company/company-coupon-create/company-coupon-create.component';
 
 
 @NgModule({
@@ -35,7 +39,11 @@ import { AdminCompanyViewComponent } from './admin/admin-company-view/admin-comp
     AdminCustomerTableComponent,
     AdminCustomerCreateComponent,
     AdminCustomerViewComponent,
-    AdminCompanyViewComponent
+    AdminCompanyViewComponent,
+    CompanyMainComponent,
+    CompanyCouponTableComponent,
+    CompanyCouponViewComponent,
+    CompanyCouponCreateComponent
   ],
   imports: [
     BrowserModule,
