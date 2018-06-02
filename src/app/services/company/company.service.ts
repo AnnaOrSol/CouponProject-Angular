@@ -52,4 +52,8 @@ export class CompanyService {
     return this.http.get(this._URL + "couponUpToPrice?price=" + price);
   }
 
+  public getCompanyIncome(): Observable<any> {
+    return this.http.get(this._URL + "income");
+  }
+
 }

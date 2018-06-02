@@ -36,6 +36,7 @@ import { CustomerProfileViewComponent } from './customer/customer-profile-view/c
 import { StoreMainComponent } from './store/store-main/store-main.component';
 import { StoreCouponTableComponent } from './store/store-coupon-table/store-coupon-table.component';
 import { CustomerCouponTableComponent } from './customer/customer-coupon-table/customer-coupon-table.component';
+import { AdminIncomeTableComponent } from './admin/admin-income-table/admin-income-table.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { CustomerCouponTableComponent } from './customer/customer-coupon-table/c
     CustomerProfileViewComponent,
     StoreMainComponent,
     StoreCouponTableComponent,
-    CustomerCouponTableComponent
+    CustomerCouponTableComponent,
+    AdminIncomeTableComponent
   ],
   imports: [
     BrowserModule,

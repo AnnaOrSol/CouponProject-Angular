@@ -7,12 +7,12 @@
 
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto">
-      <li *ngIf="loggedInType == guest" class="nav-item">
+      <li *ngIf="loggedInType == guest || loggedInType == null" class="nav-item">
         <a class="nav-link" style="cursor: pointer;" (click)="openModal(loginTemplate)">Login
           <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li *ngIf="loggedInType != guest" class="nav-item">
+      <li *ngIf="loggedInType != guest && loggedInType != null" class="nav-item">
         <a class="nav-link" href="#" (click)="logout()">Logout
           <span class="sr-only">(current)</span>
         </a>
@@ -32,11 +32,21 @@
           <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li *ngIf="loggedInType == company" class="nav-item">
-          <a class="nav-link" style="cursor: pointer;" (click)="openModal(companyProfile)"> Profile
+      <li *ngIf="loggedInType == customer" class="nav-item">
+          <a class="nav-link" style="cursor: pointer;" routerLink="/store">Store
             <span class="sr-only">(current)</span>
           </a>
         </li>
+      <li *ngIf="loggedInType == company" class="nav-item">
+        <a class="nav-link" style="cursor: pointer;" (click)="openModal(companyProfile)"> Profile
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li *ngIf="loggedInType == customer" class="nav-item">
+        <a class="nav-link" style="cursor: pointer;" (click)="openModal(customerProfile)"> Profile
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>   
       <li *ngIf="loggedInType == guest" class="nav-item">
         <a class="nav-link disabled" style="color: aliceblue"> Welcome Guest
           <span class="sr-only">(current)</span>
@@ -48,6 +58,11 @@
         </a>
       </li>
       <li *ngIf="loggedInType == company" class="nav-item">
+        <a class="nav-link disabled" style="color: aliceblue"> Welcome {{currentUserName}}
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li *ngIf="loggedInType == customer" class="nav-item">
         <a class="nav-link disabled" style="color: aliceblue"> Welcome {{currentUserName}}
           <span class="sr-only">(current)</span>
         </a>
@@ -128,4 +143,8 @@
 
 <ng-template #companyProfile>
   <app-company-profile-view [modalRef]="modalRef"></app-company-profile-view>
+</ng-template>
+
+<ng-template #customerProfile>
+  <app-customer-profile-view [modalRef]="modalRef"></app-customer-profile-view>
 </ng-template>

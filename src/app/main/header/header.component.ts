@@ -41,9 +41,12 @@ export class HeaderComponent implements OnInit {
           this.loginService.getCompanyInformation().subscribe(
             res=> { this.currentUserName = res.compName;}
           );
-        } else if (res === UserType.CUSTOMER.toUpperCase())
+        } else if (res === UserType.CUSTOMER.toUpperCase()) {
           this.loggedInType = UserType.CUSTOMER;
-        else if (res === UserType.GUEST.toUpperCase())
+          this.loginService.getCustomerInfo().subscribe(
+            res=> { this.currentUserName = res.custName;}
+          );
+        }else if (res === UserType.GUEST.toUpperCase())
           this.loggedInType = UserType.GUEST;
         else
           this.loggedInType = null;

@@ -15,6 +15,7 @@ export class AdminMainComponent implements OnInit {
 
   companies: boolean;
   customers: boolean;
+  income: boolean;
   modalRef: BsModalRef;
 
   constructor(private modalService: BsModalService, private router: Router, private sessionService: LoginService) { }

@@ -51,4 +51,8 @@ export class AdminService {
   public deleteCustomer(id: number): Observable<any> {
     return this.http.delete(this._URL + this._CUSTOMER_URL + id);
   }
+
+  public viewAllIncome(): Observable<any> {
+    return this.http.get(this._URL + "income");
+  }
 }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserType } from '../../models/userType';
+import { Router } from '@angular/router';
+import { LoginService } from '../../services/main/login.service';
 
 @Component({
   selector: 'app-customer-main',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerMainComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private sessionService: LoginService) { }
 
   ngOnInit() {
+    this.sessionService.getSessionInfo().subscribe(res => {
+      if(!(res === UserType.CUSTOMER.toUpperCase()))
+        this.router.navigate(["/home"]);
+    });
   }
 
 }

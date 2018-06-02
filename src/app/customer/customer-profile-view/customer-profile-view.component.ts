@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { LoginService } from '../../services/main/login.service';
+import { Customer } from '../../models/customer';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-customer-profile-view',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerProfileViewComponent implements OnInit {
 
-  constructor() { }
+  customer: Customer;
+  @Input() modalRef: BsModalRef;
+
+  constructor(private loginService: LoginService) { }
 
   ngOnInit() {
+    this.loginService.getCustomerInfo().subscribe(res => this.customer = res);
   }
 
 }
