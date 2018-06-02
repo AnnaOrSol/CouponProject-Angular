@@ -30,6 +30,12 @@ import { KeysPipe } from './pipes/keys.pipe';
 import { CompanyService } from './services/company/company.service';
 import { JsonDatePipe } from './pipes/json-date.pipe';
 import { DatePipe } from '@angular/common';
+import { CustomerService } from './services/customer/customer.service';
+import { CustomerMainComponent } from './customer/customer-main/customer-main.component';
+import { CustomerProfileViewComponent } from './customer/customer-profile-view/customer-profile-view.component';
+import { StoreMainComponent } from './store/store-main/store-main.component';
+import { StoreCouponTableComponent } from './store/store-coupon-table/store-coupon-table.component';
+import { CustomerCouponTableComponent } from './customer/customer-coupon-table/customer-coupon-table.component';
 
 
 @NgModule({
@@ -51,7 +57,12 @@ import { DatePipe } from '@angular/common';
     CompanyCouponCreateComponent,
     CompanyProfileViewComponent,
     KeysPipe,
-    JsonDatePipe
+    JsonDatePipe,
+    CustomerMainComponent,
+    CustomerProfileViewComponent,
+    StoreMainComponent,
+    StoreCouponTableComponent,
+    CustomerCouponTableComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +72,7 @@ import { DatePipe } from '@angular/common';
     NgbModule.forRoot(),
     ModalModule.forRoot()
   ],
-  providers: [LoginService, AdminService, CompanyService,  
+  providers: [LoginService, AdminService, CompanyService, CustomerService, 
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CredentialsInterceptor,

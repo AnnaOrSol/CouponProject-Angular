@@ -34,5 +34,9 @@ export class LoginService {
   public getCompanyInformation(): Observable<any> {
     return this.http.get(this._URL + "CompanyService/company");
   }
+  
+  public getStore(): Observable<any> {
+    return this.http.get(this._URL + "SessionService/Store");
+  }
 
 }
