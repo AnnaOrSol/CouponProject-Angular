@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { Coupon } from '../../models/coupon';
 
 @Injectable()
 export class CompanyService {
@@ -11,12 +12,19 @@ export class CompanyService {
   constructor(private http: HttpClient) { }
 
 
-  public createCoupon(coupon): Observable<any> {
-    return this.http.post(this._URL + this._COUPON_URL, coupon);
+  public createCoupon(coupon: Coupon): Observable<any> {
+    let couponToSend = new Coupon(coupon.id, coupon.title, coupon.startDate, coupon.endDate, coupon.amount, coupon.type, coupon.message, coupon.price, coupon.image);
+    couponToSend.startDate = new Date(JSON.parse(JSON.stringify(coupon.startDate))).toISOString();
+    couponToSend.endDate = new Date(JSON.parse(JSON.stringify(coupon.endDate))).toISOString();
+ 
+    return this.http.post(this._URL + this._COUPON_URL, couponToSend);
   }
 
   public updateCoupon(coupon): Observable<any> {
-    return this.http.put(this._URL + this._COUPON_URL, coupon);
+    let couponToSend = new Coupon(coupon.id, coupon.title, coupon.startDate, coupon.endDate, coupon.amount, coupon.type, coupon.message, coupon.price, coupon.image);
+    couponToSend.startDate = new Date(JSON.parse(JSON.stringify(coupon.startDate))).toISOString();
+    couponToSend.endDate = new Date(JSON.parse(JSON.stringify(coupon.endDate))).toISOString();
+    return this.http.put(this._URL + this._COUPON_URL, couponToSend);
   }
 
   public removeCoupon(id): Observable<any> {
@@ -35,11 +43,13 @@ export class CompanyService {
     return this.http.get(this._URL + "couponByType" + type);
   }
 
-  public getCouponUpToDate(date: Date): Observable<any> {
-    return this.http.get(this._URL + "couponUpToDate?date=" + date.getMilliseconds());
+  public getCouponUpToDate(date: number): Observable<any> {
+   
+    return this.http.get(this._URL + "couponUpToDate?date=" + date);
   }
 
   public getCouponUpToPrice(price: number): Observable<any> {
     return this.http.get(this._URL + "couponUpToPrice?price=" + price);
   }
+
 }

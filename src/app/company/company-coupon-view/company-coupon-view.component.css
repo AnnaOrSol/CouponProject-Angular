@@ -1,0 +1,32 @@
+@keyframes slidein {
+    0%   {opacity:0;}
+    100% {opacity:1;}
+}
+
+.coupon-container .row{
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+
+.container {
+    animation-name: slidein;
+    animation-duration: .9s;
+}
+
+.alert {
+    animation-name: slidein;
+    animation-duration: .9s;
+    display: block;
+}
+
+.modal-header {
+    background: #f0b880 ;
+}
+
+.modal-footer {
+    background: #f0b880 ;
+}
+
+.modal-body {
+    background: #f9e2cc;
+}

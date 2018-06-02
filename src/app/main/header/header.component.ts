@@ -5,6 +5,7 @@ import { LoginService } from '../../services/main/login.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ApplicationResponse } from '../../models/applicationReponse';
 import { Router } from '@angular/router';
+import { CompanyService } from '../../services/company/company.service';
 
 
 @Component({
@@ -15,12 +16,13 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   loggedInType: UserType;
+  currentUserName: string;
   user: LoginInfo;
   modalRef: BsModalRef;
   admin: string = UserType.ADMIN;
   company: string = UserType.COMPANY;
   customer: string = UserType.CUSTOMER;
-  guest: string =  UserType.GUEST;
+  guest: string = UserType.GUEST;
   response: ApplicationResponse;
 
   constructor(private loginService: LoginService, private modalService: BsModalService, private router: Router) {
@@ -32,13 +34,16 @@ export class HeaderComponent implements OnInit {
     this.loginService.getSessionInfo().subscribe(
       (res: UserType) => {
         console.log(res);
-        if(res === UserType.ADMIN.toUpperCase())
+        if (res === UserType.ADMIN.toUpperCase())
           this.loggedInType = UserType.ADMIN;
-        else if(res === UserType.COMPANY.toUpperCase())
+        else if (res === UserType.COMPANY.toUpperCase()) {
           this.loggedInType = UserType.COMPANY;
-        else if(res === UserType.CUSTOMER.toUpperCase())
+          this.loginService.getCompanyInformation().subscribe(
+            res=> { this.currentUserName = res.compName;}
+          );
+        } else if (res === UserType.CUSTOMER.toUpperCase())
           this.loggedInType = UserType.CUSTOMER;
-        else if(res === UserType.GUEST.toUpperCase())
+        else if (res === UserType.GUEST.toUpperCase())
           this.loggedInType = UserType.GUEST;
         else
           this.loggedInType = null;
@@ -57,17 +62,19 @@ export class HeaderComponent implements OnInit {
         this.response.alertType = "success";
         setTimeout(() => {
           let route: string = "admin";
-          if(this.user.userType === UserType.COMPANY) {
+          if (this.user.userType === UserType.COMPANY) {
             this.loggedInType = UserType.COMPANY;
             route = "company";
-          } else if(this.user.userType === UserType.CUSTOMER) {
+          } else if (this.user.userType === UserType.CUSTOMER) {
             this.loggedInType = UserType.CUSTOMER;
             route = "customer";
+          } else {
+            this.loggedInType = UserType.ADMIN;
           }
-          this.loggedInType = UserType.ADMIN;
+          this.currentUserName = this.user.userName;
           this.modalRef.hide();
           this.response = null;
-          this.user =  new LoginInfo("", "", UserType.ADMIN);
+          this.user = new LoginInfo("", "", UserType.ADMIN);
           this.router.navigate([route]);
         }, 500);
       } else {

@@ -11,6 +11,7 @@ import { UserType } from '../../models/userType';
 })
 export class CompanyMainComponent implements OnInit {
   coupons: boolean;
+  couponsToSend: any[];
   modalRef: BsModalRef;
   constructor(private modalService: BsModalService, private router: Router, private sessionService: LoginService) { }
 
@@ -23,5 +24,11 @@ export class CompanyMainComponent implements OnInit {
 
   public openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
+  }
+
+  public loadCoupons(couponsSent) {
+    console.log(couponsSent);
+    this.couponsToSend = couponsSent;
+    this.coupons = true;
   }
 }

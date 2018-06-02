@@ -40,6 +40,7 @@ export class AdminCustomerViewComponent implements OnInit {
         }
       }, err => {
         this.searchResponse = err.error;
+        this.searchResponse.alertType = "danger";
       }
     );
   }
