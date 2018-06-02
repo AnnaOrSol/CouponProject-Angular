@@ -4,6 +4,7 @@ import { ApplicationResponse } from '../../models/applicationReponse';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { CompanyService } from '../../services/company/company.service';
 import { DatePipe } from '@angular/common';
+import { CouponType } from '../../models/couponType';
 
 @Component({
   selector: 'app-company-coupon-view',
@@ -15,6 +16,9 @@ export class CompanyCouponViewComponent implements OnInit {
 
   id: number;
   date: Date;
+  price: number;
+  couponTypes = CouponType;
+  type: CouponType = CouponType.RESTAURANTS;
   coupon: Coupon;
   searchById: boolean;
   searchUpToDate: boolean;
@@ -34,6 +38,12 @@ export class CompanyCouponViewComponent implements OnInit {
   ngOnInit() {
   }
 
+  public nullify() {
+    this.coupon = null;
+    this.response = null;
+    this.searchResponse = null;
+  }
+
   public findCouponsUpToDate() {
     this.coupon = null;
     this.response = null;
@@ -42,8 +52,14 @@ export class CompanyCouponViewComponent implements OnInit {
     this.companyService.getCouponUpToDate(dateInTime.getTime()).subscribe(
       res => {
         if (res instanceof Array) {
-          if (res.length != 0)
+          if (res.length != 0) {
             this.sendCoupons.emit(res);
+            setTimeout(() => {
+              this.modalRef.hide();
+            }, 500);
+          } else {
+            this.searchResponse = new ApplicationResponse(0, "No coupons before selected date.", "warning");
+          }
         }
         else {
           this.searchResponse = res;
@@ -54,6 +70,62 @@ export class CompanyCouponViewComponent implements OnInit {
         this.searchResponse.alertType = "danger";
       }
 
+    );
+  }
+
+  public findCouponsUpToPrice() {
+    this.coupon = null;
+    this.response = null;
+    this.searchResponse = null;
+    this.companyService.getCouponUpToPrice(this.price).subscribe(
+      res => {
+        if (res instanceof Array) {
+          if (res.length != 0) {
+            this.sendCoupons.emit(res);
+            setTimeout(() => {
+              this.modalRef.hide();
+            }, 500);
+
+          }else {
+            this.searchResponse = new ApplicationResponse(0, "No coupons up to selected price.", "warning");
+          }
+        }
+        else {
+          this.searchResponse = res;
+          this.searchResponse.alertType = "warning";
+        }
+      }, err => {
+        this.searchResponse = err.error;
+        this.searchResponse.alertType = "danger";
+      }
+
+    );
+  }
+
+  public findCouponsByType() {
+    this.coupon = null;
+    this.response = null;
+    this.searchResponse = null;
+    this.companyService.getCouponByType(this.type).subscribe(
+      res => {
+        if (res instanceof Array) {
+          if (res.length != 0) {
+            this.sendCoupons.emit(res);
+            setTimeout(() => {
+              this.modalRef.hide();
+            }, 500);
+          } else {
+            this.searchResponse = new ApplicationResponse(0, "No coupons of specified type.", "warning");
+          }
+        }
+        else {
+          this.searchResponse = res;
+          this.searchResponse.alertType = "warning";
+        }
+      }, err => {
+        this.searchResponse = err.error;
+        this.searchResponse.alertType = "danger";
+      }
     );
   }
 

@@ -40,7 +40,7 @@ export class CompanyService {
   }
 
   public getCouponByType(type): Observable<any> {
-    return this.http.get(this._URL + "couponByType" + type);
+    return this.http.get(this._URL + "couponByType/" + type);
   }
 
   public getCouponUpToDate(date: number): Observable<any> {

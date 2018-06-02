@@ -31,4 +31,10 @@ export class CompanyMainComponent implements OnInit {
     this.couponsToSend = couponsSent;
     this.coupons = true;
   }
+
+  public openCoupons(){
+    this.coupons = false;
+    this.couponsToSend = null;
+    setTimeout(()=> {this.coupons = true;}, 200);
+  }
 }
