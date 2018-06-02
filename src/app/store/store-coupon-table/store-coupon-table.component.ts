@@ -27,6 +27,10 @@ export class StoreCouponTableComponent implements OnInit {
     );
   }
 
+  public closeAlert() {
+    this.response = null;
+  }
+
   public fixArray(array) {
     array.forEach(couponElement => {
       couponElement.color = "#f9e2cc;"
